@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<students>
+    <student>
+        <name>Marjory Weissnat</name>
+        <class>Java_10</class>
+        <scores>
+            <score name="CSS">67</score>
+            <score name="PHP">87</score>
+            <score name="Java">70</score>
+        </scores>
+    </student>
+    <student>
+        <name>Germaine Feeney</name>
+        <class>Java_06</class>
+        <scores>
+            <score name="CSS">80</score>
+            <score name="PHP">77</score>
+            <score name="Java">65</score>
+        </scores>
+    </student>
+    <student>
+        <name>Hollie Wintheiser</name>
+        <class>PHP_27</class>
+        <scores>
+            <score name="CSS">79</score>
+            <score name="PHP">78</score>
+            <score name="Java">56</score>
+        </scores>
+    </student>
+    <student>
+        <name>Gussie Fahey</name>
+        <class>PHP_27</class>
+        <scores>
+            <score name="CSS">90</score>
+            <score name="PHP">89</score>
+            <score name="Java">67</score>
+        </scores>
+    </student>
+</students>
