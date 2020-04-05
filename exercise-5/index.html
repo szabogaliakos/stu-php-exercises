@@ -1,0 +1,32 @@
+<?php
+    include "autoload.php"
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mooncake</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/requestHandler.js" type="text/javascript"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Mooncake</h1>
+        <label>Choose a Mooncake:</label>
+        <select name="mooncakes" id="mooncakes" onchange="getMooncake(this.value)">
+            <option value="wuren">Wuren</option>
+            <option value="red-bean">Red Bean</option>
+            <option value="white-lotus">White Lotus</option>
+            <option value="salted-egg-yolk">Salted Egg Yolk</option>
+            <option value="snow-skin">Snow Skin</option>
+            <option value="minced-pork">Minced Pork</option>
+            <option value="green-tea">Green Tea</option>
+            <option value="fruits">Fruits</option>
+            <option value="flower">Flower</option>
+            <option value="yam">Yam</option>
+        </select>
+        <div id="info">
+        </div>
+    </div>
+</body>
+</html>
