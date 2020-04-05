@@ -13,7 +13,6 @@ class MooncakeRepository{
     public function getMooncake($flavor){
         $stmt = $this->db->prepare("SELECT * FROM mooncakes WHERE CakeID = :flavor");
         $stmt->bindParam(':flavor', $flavor);
-        $flavor = $flavor;
         $stmt->execute();
 
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
