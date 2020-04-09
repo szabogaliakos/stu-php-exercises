@@ -4,6 +4,7 @@
         <h1 class="display-4 text-center">Tech news</h1>
     </div>
 </div>
+<?php flash('article_message') ?>
 <div class="container">
         <?php foreach ($data['articles'] as $article) : ?>
             <div class="row d-flex justify-content-center">

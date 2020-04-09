@@ -3,7 +3,7 @@
 
     <div class="card card-body bg-light mt-5">
         <h2>Publish Article</h2>
-        <form action="<?php echo URLROOT ; ?>/articles/add" method="post">
+        <form action="<?php echo URLROOT . '/articles/edit/' . $data['id']; ?>" method="post">
             <div class="form-group">
                 <label for="title">Title</label>
                 <input type="text" name="title" class="form-control form-control-lg
