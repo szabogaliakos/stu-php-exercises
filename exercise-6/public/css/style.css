@@ -1,0 +1,17 @@
+*{
+    font-family: sans-serif;
+}
+.card {
+    width: 100%;
+}
+.card-img{
+    width: 100px;
+    height: 100px;
+}
+.card-title{
+    font-weight: bolder;
+    font-size: large;
+}
+.card-footer{
+    background-color:white;
+}
