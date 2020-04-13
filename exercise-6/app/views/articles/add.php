@@ -15,9 +15,9 @@
                 <span class="invalid-feedback"><?php echo $data['description_err'] ?></span>
             </div>
             <div class="form-group">
-                <label for="image">Upload image:</label>
-                <input type="file" name="image" id="img" class="form-control form-control-lg<?php echo !empty($data['image_err']) ? ' is-invalid' : ''; ?>">
-                <span class="invalid-feedback"><?php echo $data['image_err'] ?></span>
+                <label for="images">Upload image:</label>
+                <input type="file" name="images[]" accept="image/*" id="img" class="form-control form-control-lg<?php echo !empty($data['images_err']) ? ' is-invalid' : ''; ?>" multiple>
+                <span class="invalid-feedback"><?php echo $data['images_err'] ?></span>
             </div>
             <input type="submit" class="btn btn-success" value="Submit">
             <a href="<?php echo URLROOT; ?>/articles" class="btn btn-danger">Back</a>

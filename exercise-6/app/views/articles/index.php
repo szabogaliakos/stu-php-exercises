@@ -9,7 +9,7 @@
         <?php foreach ($data['articles'] as $article) : ?>
             <div class="row d-flex justify-content-center">
                 <div class="card card-body mb-3">
-                    <img src="img/<?php echo $article->image; ?>" class="card-img" alt="<?php echo $article->image; ?>">
+                    <img src="img/<?php echo $article->image[0]; ?>" class="card-img" alt="<?php echo $article->image; ?>">
                     <h4 class="card-title"><?php echo $article->title; ?></h4>
                     <div class="bg-light p-2 mb-3">
                         Published on <?php echo $article->created_at ?>

@@ -28,10 +28,10 @@ class Articles extends Controller{
                 'title' => trim($_POST['title']),
                 'description' => trim($_POST['description']),
                 'user_id' => $_SESSION['user_id'],
-                'image' => $_FILES['image']['name'],
+                'images' => $this->reArrayFiles($_FILES['images']),
                 'title_err' => '',
                 'description_err' => '',
-                'image_err' => ''
+                'images_err' => ''
             ];
 
             if (empty($data['title'])){
@@ -41,9 +41,9 @@ class Articles extends Controller{
                 $data['description_err'] = 'Please enter text';
             }
 
-            $data['image_err'] = $this->validateImageUpload($data['image']);
+            $data['images_err'] = $this->validateImageUpload($data['images']);
 
-            if (empty($data['title_err']) && empty($data['description_err']) && empty($data['image_err'])){
+            if (empty($data['title_err']) && empty($data['description_err']) && empty($data['images_err'])){
                 if($this->articlesModel->addArticle($data)){
                     flash('article_message', 'Article Published');
                     redirect('articles');
@@ -78,10 +78,10 @@ class Articles extends Controller{
                 'title' => trim($_POST['title']),
                 'description' => trim($_POST['description']),
                 'user_id' => $_SESSION['user_id'],
-                'image' => $_FILES['image']['name'],
+                'images' => $_FILES['images']['name'],
                 'title_err' => '',
                 'description_err' => '',
-                'image_err' => ''
+                'images_err' => ''
             ];
 
             if (empty($data['title'])){
@@ -91,9 +91,9 @@ class Articles extends Controller{
                 $data['description_err'] = 'Please enter text';
             }
 
-            $data['image_err'] = $this->validateImageUpload($data['image']);
+            $data['images_err'] = $this->validateImageUpload($data['image']);
 
-            if (empty($data['title_err']) && empty($data['description_err'])){
+            if (empty($data['title_err']) && empty($data['description_err']) && empty($data['images_err'])){
                 if($this->articlesModel->updateArticle($data)){
                     flash('article_message', 'Article Updated');
                     redirect('articles');
@@ -146,29 +146,42 @@ class Articles extends Controller{
         }
     }
 
-    private function validateImageUpload($image){
-        if (empty($image)){
-            return 'Please upload an image';
+    private function validateImageUpload($images){
+        foreach ($images as $image) {
+
+            if (empty($image)){
+                return 'Please upload an image';
+            }
+
+            $target_dir = 'img/';
+            $target_file = $target_dir . basename($image['name']);
+            $check = getimagesize($image['tmp_name']);
+            if(!$check) {
+                return 'File is not an image.';
+            }
+            if ($image['size'] > 500000) {
+                return 'Sorry, your file is too large.';
+            }
+            if (!file_exists($target_file)) {
+                if (!move_uploaded_file($image["tmp_name"], $target_file)) {
+                    return 'Sorry, there was an error uploading your file.';
+                }
+            }
+        }
+    }
+
+    private function reArrayFiles(&$file_post) {
+
+        $file_ary = array();
+        $file_count = count($file_post['name']);
+        $file_keys = array_keys($file_post);
+
+        for ($i=0; $i<$file_count; $i++) {
+            foreach ($file_keys as $key) {
+                $file_ary[$i][$key] = $file_post[$key][$i];
+            }
         }
 
-        $target_dir = 'img/';
-        $target_file = $target_dir . basename($_FILES['image']['name']);
-        $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-        $check = getimagesize($_FILES['image']['tmp_name']);
-        if(!$check) {
-            return 'File is not an image.';
-        }
-        if (file_exists($target_file)) {
-            return 'Sorry, file already exists.';
-        }
-        if ($_FILES['image']['size'] > 500000) {
-            return 'Sorry, your file is too large.';
-        }
-        if($imageFileType != 'jpg' && $imageFileType != 'png' && $imageFileType != 'jpeg' && $imageFileType != 'gif' ) {
-            return 'Sorry, only JPG, JPEG, PNG & GIF files are allowed.';
-        }
-        if (!move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
-            return 'Sorry, there was an error uploading your file.';
-        }
+        return $file_ary;
     }
 }

@@ -1,7 +1,9 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 <div class="container">
     <h3><?php echo $data['article']->title; ?></h3>
-    <img src="../../img/<?php echo $data['article']->image; ?>" class="card-img" alt="<?php echo $data['article']->image; ?>">
+    <?php foreach ($data['article']->image as $img) : ?>
+    <img src="../../img/<?php echo $img; ?>" class="card-img" alt="<?php echo $img; ?>">
+    <?php endforeach; ?>
     <div class="bg-secondary text-white p-2 mb-3">
         <?php echo $data['article']->created_at; ?>
     </div>
