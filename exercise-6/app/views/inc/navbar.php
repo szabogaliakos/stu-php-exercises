@@ -6,12 +6,6 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarColor01">
-            <ul class="navbar-nav mr-auto">
-                <form class="form-inline">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
-                </form>
-            </ul>
             <ul class="navbar-nav ml-auto">
                 <?php if(isset($_SESSION['user_id'])) : ?>
                     <li class="nav-item">
