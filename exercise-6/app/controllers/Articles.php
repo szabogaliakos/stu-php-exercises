@@ -78,9 +78,10 @@ class Articles extends Controller{
                 'title' => trim($_POST['title']),
                 'description' => trim($_POST['description']),
                 'user_id' => $_SESSION['user_id'],
-                'image' => $_SESSION['image'],
+                'image' => $_FILES['image']['name'],
                 'title_err' => '',
-                'description_err' => ''
+                'description_err' => '',
+                'image_err' => ''
             ];
 
             if (empty($data['title'])){
@@ -89,6 +90,8 @@ class Articles extends Controller{
             if (empty($data['description'])){
                 $data['description_err'] = 'Please enter text';
             }
+
+            $data['image_err'] = $this->validateImageUpload($data['image']);
 
             if (empty($data['title_err']) && empty($data['description_err'])){
                 if($this->articlesModel->updateArticle($data)){

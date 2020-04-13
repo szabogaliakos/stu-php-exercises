@@ -1,6 +1,7 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 <div class="container">
     <h3><?php echo $data['article']->title; ?></h3>
+    <img src="../../img/<?php echo $data['article']->image; ?>" class="card-img" alt="<?php echo $data['article']->image; ?>">
     <div class="bg-secondary text-white p-2 mb-3">
         <?php echo $data['article']->created_at; ?>
     </div>
