@@ -5,7 +5,7 @@
     <title>Calculator</title>
 </head>
 <body>
-    <form action="index.php">
+    <form action="index.php" method="GET">
         <h1>Calculation</h1>
         <label>First number:</label>
         <input type="number" name="a" required><br>
