@@ -78,7 +78,7 @@ class Articles extends Controller{
                 'title' => trim($_POST['title']),
                 'description' => trim($_POST['description']),
                 'user_id' => $_SESSION['user_id'],
-                'images' => $_FILES['images']['name'],
+                'images' => $this->reArrayFiles($_FILES['images']),
                 'title_err' => '',
                 'description_err' => '',
                 'images_err' => ''
@@ -91,7 +91,7 @@ class Articles extends Controller{
                 $data['description_err'] = 'Please enter text';
             }
 
-            $data['images_err'] = $this->validateImageUpload($data['image']);
+            $data['images_err'] = $this->validateImageUpload($data['images']);
 
             if (empty($data['title_err']) && empty($data['description_err']) && empty($data['images_err'])){
                 if($this->articlesModel->updateArticle($data)){
@@ -111,7 +111,7 @@ class Articles extends Controller{
                 'id' => $article->id,
                 'title' => $article->title,
                 'description' => $article->description,
-                'image' => $article->image
+                'images' => $article->image
             ];
 
             $this->view('articles/edit', $data);
