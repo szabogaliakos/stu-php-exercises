@@ -2,7 +2,7 @@
 <div class="container">
     <h3><?php echo $data['article']->title; ?></h3>
     <?php foreach ($data['article']->image as $img) : ?>
-    <img src="../../img/<?php echo $img; ?>" class="card-img" alt="<?php echo $img; ?>">
+    <img src="../../img/<?php echo $img->name; ?>" class="card-img" alt="<?php echo $img->name; ?>">
     <?php endforeach; ?>
     <div class="bg-secondary text-white p-2 mb-3">
         <?php echo $data['article']->created_at; ?>

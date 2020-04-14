@@ -159,9 +159,6 @@ class Articles extends Controller{
             if(!$check) {
                 return 'File is not an image.';
             }
-            if ($image['size'] > 500000) {
-                return 'Sorry, your file is too large.';
-            }
             if (!file_exists($target_file)) {
                 if (!move_uploaded_file($image["tmp_name"], $target_file)) {
                     return 'Sorry, there was an error uploading your file.';
