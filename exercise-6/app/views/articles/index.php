@@ -10,7 +10,7 @@
         <?php foreach ($data['articles'] as $article) : ?>
         <div class="col-sm-12 col-md-6 col-lg-6">
             <div class="card">
-                <img src="img/<?php echo $article->image[0]->name; ?>" alt="Avatar" style="width:100%">
+                <img src="img/<?php echo $article->image[0]; ?>" alt="Avatar" style="width:100%">
                 <div class="card-container">
                     <p class="text-center pt-3"><b><?php echo $article->title; ?></b></p>
                     <p class="text-center"><small>Published on <?php echo $article->created_at ?></small></p>

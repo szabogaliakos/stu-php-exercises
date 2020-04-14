@@ -44,6 +44,12 @@ class Articles extends Controller{
             $data['images_err'] = $this->validateImageUpload($data['images']);
 
             if (empty($data['title_err']) && empty($data['description_err']) && empty($data['images_err'])){
+                $imageNames = array();
+                foreach ($data['images'] as $image){
+                    array_push($imageNames, $image['name']);
+                }
+                $data['images'] = $imageNames;
+
                 if($this->articlesModel->addArticle($data)){
                     flash('article_message', 'Article Published');
                     redirect('articles');
@@ -94,6 +100,12 @@ class Articles extends Controller{
             $data['images_err'] = $this->validateImageUpload($data['images']);
 
             if (empty($data['title_err']) && empty($data['description_err']) && empty($data['images_err'])){
+                $imageNames = array();
+                foreach ($data['images'] as $image){
+                    array_push($imageNames, $image['name']);
+                }
+                $data['images'] = $imageNames;
+
                 if($this->articlesModel->updateArticle($data)){
                     flash('article_message', 'Article Updated');
                     redirect('articles');

@@ -30,3 +30,22 @@
 card-img {
     border-radius: 5px 5px 0 0;
 }
+
+.article-image{
+    border-radius: 5px 5px 0 0;
+    width: 100px;
+    height: 100px;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+}
+
+.control-item{
+    width: 150px;
+}
+
+.blog-post{
+    padding-bottom: 20px;
+}

@@ -21,8 +21,10 @@
                 <input type="file" name="images[]" accept="image/*" id="images" class="form-control form-control-lg<?php echo !empty($data['images_err']) ? ' is-invalid' : ''; ?>" multiple>
                 <span class="invalid-feedback"><?php echo $data['images_err'] ?></span>
             </div>
-            <input type="submit" class="btn btn-success" value="Submit">
-            <a href="<?php echo URLROOT; ?>/articles" class="btn btn-danger">Back</a>
+            <div class="controls">
+                <input type="submit" class="btn btn-success control-item mr-3" value="Submit">
+                <a href="<?php echo URLROOT; ?>/articles" class="btn btn-danger control-item ml-3">Back</a>
+            </div>
         </form>
     </div>
 </div>
