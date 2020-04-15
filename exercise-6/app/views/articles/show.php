@@ -3,14 +3,8 @@
     <div class="blog-post">
         <h2 class="blog-post-title pl-4 pr-4 pt-4 mt-4 text-center"><?php echo $data['article']->title; ?></h2>
         <p class="blog-post-meta mb-4 text-center"><?php echo $data['article']->created_at; ?></p>
+
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
-                <?php
-                echo '<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>';
-                for ($i = 1; $i < count($data['article']->image); $i++){
-                    echo '<li data-target="#carouselExampleIndicators" data-slide-to="'.$i.'"></li>';
-                } ?>
-            </ol>
             <div class="carousel-inner">
                 <?php foreach ($data['article']->image as $img) : ?>
                     <div class="carousel-item <?php echo ($data['article']->image[0] === $img) ? 'active': ''; ?>">
@@ -18,15 +12,25 @@
                     </div>
                 <?php endforeach; ?>
             </div>
-            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
+            <?php if(count($data['article']->image) > 1) : ?>
+                <ol class="carousel-indicators">
+                    <?php
+                    echo '<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>';
+                    for ($i = 1; $i < count($data['article']->image); $i++){
+                        echo '<li data-target="#carouselExampleIndicators" data-slide-to="'.$i.'"></li>';
+                    } ?>
+                </ol>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            <?php endif; ?>
         </div>
+
         <p class="m-4 text-justify"><?php echo $data['article']->description; ?></p>
         <?php if(isset($_SESSION['user_id'])) : ?>
             <hr>

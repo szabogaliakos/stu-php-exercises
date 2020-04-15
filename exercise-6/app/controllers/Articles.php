@@ -22,8 +22,6 @@ class Articles extends Controller{
 
         if($_SERVER['REQUEST_METHOD'] == 'POST')
         {
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
             $data = [
                 'title' => trim($_POST['title']),
                 'description' => trim($_POST['description']),
@@ -41,7 +39,12 @@ class Articles extends Controller{
                 $data['description_err'] = 'Please enter text';
             }
 
-            $data['images_err'] = $this->validateImageUpload($data['images']);
+            if (empty($data['images'][0]['name'])){
+                $data['images_err'] = 'Please upload an image';
+            }
+            else{
+                $data['images_err'] = $this->validateImageUpload($data['images']);
+            }
 
             if (empty($data['title_err']) && empty($data['description_err']) && empty($data['images_err'])){
                 $imageNames = array();
@@ -77,8 +80,6 @@ class Articles extends Controller{
 
         if($_SERVER['REQUEST_METHOD'] == 'POST')
         {
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
             $data = [
                 'id' => $id,
                 'title' => trim($_POST['title']),
@@ -97,12 +98,19 @@ class Articles extends Controller{
                 $data['description_err'] = 'Please enter text';
             }
 
-            $data['images_err'] = $this->validateImageUpload($data['images']);
+            if (!empty($data['images'][0]['name'])){
+                $data['images_err'] = $this->validateImageUpload($data['images']);
+
+            }
 
             if (empty($data['title_err']) && empty($data['description_err']) && empty($data['images_err'])){
-                $imageNames = array();
+                $article = $this->articlesModel->getArticleById($id);
+
+                $imageNames = $article->image;
                 foreach ($data['images'] as $image){
-                    array_push($imageNames, $image['name']);
+                    if (!empty($image['name'])){
+                        array_push($imageNames, $image['name']);
+                    }
                 }
                 $data['images'] = $imageNames;
 
@@ -160,11 +168,6 @@ class Articles extends Controller{
 
     private function validateImageUpload($images){
         foreach ($images as $image) {
-
-            if (empty($image)){
-                return 'Please upload an image';
-            }
-
             $target_dir = 'img/';
             $target_file = $target_dir . basename($image['name']);
             $check = getimagesize($image['tmp_name']);
